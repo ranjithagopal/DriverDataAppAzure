@@ -16,6 +16,7 @@ var xmlhttp, myObj, x, txt = "";
 xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
+    	document.getElementById("header").innerHTML = "Consolidated driver data";
         myObj = JSON.parse(this.responseText);
         txt += "<table border='1'>"
         txt += "<tr><th>" + 'VIN' + "</th>";
@@ -41,7 +42,7 @@ xmlhttp.onreadystatechange = function() {
                 txt += "<td>" + myObj[x].RiskScore + "</td></tr>";
             }
         	txt += "</table>"     
-        document.getElementById("demo").innerHTML = txt;
+        document.getElementById("driverdata").innerHTML = txt;
     }
 };
 xmlhttp.open("GET", "https://driverdatamobileapp.azurewebsites.net/api/drivertestapi", true);
@@ -49,6 +50,7 @@ xmlhttp.send();
 </script>
 </head>
 <body>
-<p id="demo"></p>
+<h2 id="header"></h2>
+<p id="driverdata"></p>
 </body>
 </html>

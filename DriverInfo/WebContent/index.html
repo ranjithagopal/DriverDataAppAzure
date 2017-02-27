@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Driver Data</title>
+<style type="text/css">
+	table{
+		border-collapse: collapse;
+	}
+	td{
+		text-align: center;
+	}
+</style>
+<script type="text/javascript">
+var xmlhttp, myObj, x, txt = "";
+xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+        txt += "<table border='1'>"
+        txt += "<tr><th>" + 'VIN' + "</th>";
+        txt += "<th>" + 'Driver ID' + "</th>";
+        txt += "<th>" + 'Idle Counter' + "</th>";
+        txt += "<th>" + 'Overspeed Counter' + "</th>";
+        txt += "<th>" + 'Hard Acceleration Counter' + "</th>";
+        txt += "<th>" + 'Efficiency Score' + "</th>";
+        txt += "<th>" + 'Overall trip' + "</th>";
+        txt += "<th>" + 'Speed Score' + "</th>";
+        txt += "<th>" + 'Trip Distance' + "</th>";
+        txt += "<th>" + 'Risk Score' + "</th></tr>";
+        	for (x in myObj) {
+                txt += "<tr><td>" + myObj[x].VIN + "</td>";
+                txt += "<td>" + myObj[x].DriverID + "</td>";
+                txt += "<td>" + myObj[x].IdleCounter + "</td>";
+                txt += "<td>" + myObj[x].OverSpeedingCounter + "</td>";
+                txt += "<td>" + myObj[x].HardAccelerationCounter + "</td>";
+                txt += "<td>" + myObj[x].EfficiencyScore + "</td>";
+                txt += "<td>" + myObj[x].OverDriverCounter + "</td>";
+                txt += "<td>" + myObj[x].SpeedScore + "</td>";
+                txt += "<td>" + myObj[x].TripDistance + "</td>";
+                txt += "<td>" + myObj[x].RiskScore + "</td></tr>";
+            }
+        	txt += "</table>"     
+        document.getElementById("demo").innerHTML = txt;
+    }
+};
+xmlhttp.open("GET", "https://driverdatamobileapp.azurewebsites.net/api/drivertestapi", true);
+xmlhttp.send();
+</script>
+</head>
+<body>
+<p id="demo"></p>
+</body>
+</html>
